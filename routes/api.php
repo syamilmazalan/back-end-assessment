@@ -25,4 +25,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('users/{email}', 'Api\UserController@show');
     Route::patch('users/{email}', 'Api\UserController@update');
     Route::delete('users/{email}', 'Api\UserController@destroy');
+
+    Route::post('users/import', 'Api\UserController@import');
 });
