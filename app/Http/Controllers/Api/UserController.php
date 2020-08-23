@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -20,6 +20,24 @@ class UserController extends Controller
         $users = User::all();
 
         return UserResource::collection($users);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(UserCreateRequest $request)
+    {
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        return new UserResource($user);
     }
 
     /**
@@ -47,7 +65,7 @@ class UserController extends Controller
         $user = User::where('email', $email)->first();
 
         $user->update([
-            'name' => $request->name,
+            'name' => $request->name
         ]);
 
         return new UserResource($user);

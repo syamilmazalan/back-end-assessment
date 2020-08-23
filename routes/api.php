@@ -21,6 +21,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('logout', 'Api\AuthController@logout');
 
     Route::get('users', 'Api\UserController@index');
+    Route::post('users', 'Api\UserController@store');
     Route::get('users/{email}', 'Api\UserController@show');
     Route::patch('users/{email}', 'Api\UserController@update');
     Route::delete('users/{email}', 'Api\UserController@destroy');
